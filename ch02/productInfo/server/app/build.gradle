@@ -6,7 +6,7 @@
  * User Manual available at https://docs.gradle.org/8.0/userguide/building_java_projects.html
  */
 
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'com.google.protobuf'
 
 repositories {
@@ -56,8 +56,13 @@ protobuf {
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    
     manifest {
         attributes "Main-Class": "ecommerce.ProductInfoServer"
+    }
+    from {
+        configurations.runtimeClasspath .collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
