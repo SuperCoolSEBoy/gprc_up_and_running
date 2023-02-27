@@ -55,6 +55,15 @@ protobuf {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
+}
+
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
@@ -62,7 +71,7 @@ jar {
         attributes "Main-Class": "ecommerce.ProductInfoClient"
     }
     from {
-        configurations.runtimeClasspath .collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 

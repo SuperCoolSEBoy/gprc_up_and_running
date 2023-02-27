@@ -6,7 +6,7 @@
  * User Manual available at https://docs.gradle.org/8.0/userguide/building_java_projects.html
  */
 
-apply plugin: 'java-library'
+apply plugin: 'java'
 apply plugin: 'com.google.protobuf'
 
 repositories {
@@ -22,7 +22,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
-    
+
     implementation "io.grpc:grpc-netty:${grpcVersion}"
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"
     implementation "io.grpc:grpc-stub:${grpcVersion}"
@@ -66,9 +66,9 @@ sourceSets {
 
 jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    
+
     manifest {
-        attributes "Main-Class": "ecommerce.ProductInfoServer"
+        attributes "Main-Class": "ecommerce.OrderMgtClient"
     }
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
